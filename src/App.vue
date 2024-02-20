@@ -1,14 +1,14 @@
 <template>
   <v-app>
     
-    <v-layout class="rounded rounded-md">
+    <v-layout>
       
     <v-app-bar title="TGBBZ-1" color="primary">
 
     
       <!--v-btn >Widgets</v-btn-->
 
-      <v-menu>
+      <v-menu >
       <template v-slot:activator="{ props }">
         <v-btn
           color="white"
@@ -18,16 +18,8 @@
         </v-btn>
       </template>
 
-      <v-list>
-        
-       
-
-
-
-
-
-
-        
+      <v-list style="width: 50rem;">
+        <v-list-item v-for="item in widgets" :key="item.widgetid"><v-checkbox-btn>{{ item.widget }}</v-checkbox-btn></v-list-item>
 
 
       </v-list>
@@ -42,18 +34,19 @@
 
    
 
-    <v-navigation-drawer rail="false">
+    <v-navigation-drawer rail expand-on-hover>
       <v-list>
         <v-list-item title="Dashboard" to="/dashboard" prepend-icon="mdi-view-dashboard"></v-list-item>
+        <v-divider></v-divider>
         <v-list-item title="Klassenverwaltung" to="/class" prepend-icon="mdi-account-group"></v-list-item>
-
+        <v-divider></v-divider>
 
       </v-list>
 
       
     </v-navigation-drawer>
 
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+    <v-main>
       <router-view/>
     </v-main>
   </v-layout>
@@ -85,10 +78,32 @@ export default defineComponent({
 
   data () {
     return {
-      rail : false,
+      rail : true,
+
+      widgets: [
+        {
+          widgetid: 1,
+          widget:"Klassenverwaltung"
+        },
+        {
+          widgetid: 2,
+          widget:"Kalendar"
+        },
+
+
+
+      ]
+
+
+
     }
   },
+  methods: {
+ 
 
+
+
+  },
 
   computed: {
    

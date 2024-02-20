@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue';
 import Dashboard from '../views/Dashboard.vue';
+import Klassenverwaltung from '../views/Klassenverwaltung.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,6 +9,21 @@ const routes: Array<RouteRecordRaw> = [
     name: 'dashboard',
     component: Dashboard
   },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard
+  },
+
+  {
+    path: '/class',
+    name: 'klassenverwaltung',
+    component: Klassenverwaltung
+  },
+
+
+
+
   {
     path: '/about',
     name: 'about',
