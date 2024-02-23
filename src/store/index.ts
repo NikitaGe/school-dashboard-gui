@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
+
 
 export default createStore({
   state: {
-
+ 
 
   },
   getters: {
@@ -14,10 +16,18 @@ export default createStore({
 
   },
   actions: {
-    async getSchuelerklasse() {
-      const response = await fetch('')
+    async getSchuelerklasse(context, payload) {
+     
+      const response = await axios.get(`http://localhost:3000/api/users/getUserList`)
+      console.log("DATA",response.data);
+      
+      
     }
 
+
+
+
+    
 
 
   },

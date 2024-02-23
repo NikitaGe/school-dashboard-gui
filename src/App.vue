@@ -13,16 +13,31 @@
         <v-btn
           color="white"
           v-bind="props"
+          prepend-icon="mdi-account"
         >
-         Widgets
+         Benutzer
         </v-btn>
       </template>
 
-      <v-list style="width: 50rem;">
-        <v-list-item v-for="item in widgets" :key="item.widgetid"><v-checkbox-btn>{{ item.widget }}</v-checkbox-btn></v-list-item>
+      <v-list
+          :lines="false"
+          density="compact"
+          nav
+        >
+          <v-list-item
+            v-for="(item) in items"
+            :key="item.text"
+            :value="item"
+            color="primary"
+            @click="dropDown(item.text)"
+          >
+            <template v-slot:prepend>
+              <v-icon :icon="item.icon"></v-icon>
+            </template>
 
-
-      </v-list>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
+          </v-list-item>
+        </v-list>
     </v-menu>
 
 
@@ -36,9 +51,9 @@
 
     <v-navigation-drawer rail expand-on-hover>
       <v-list>
-        <v-list-item title="Dashboard" to="/dashboard" prepend-icon="mdi-view-dashboard"></v-list-item>
-        <v-divider></v-divider>
-        <v-list-item title="Klassenverwaltung" to="/class" prepend-icon="mdi-account-group"></v-list-item>
+        
+        
+        <v-list-item v-for="item in navigation" :key="item.title" :title="item.title" :to="item.link" :prepend-icon=item.icon></v-list-item>
         <v-divider></v-divider>
 
       </v-list>
@@ -59,8 +74,7 @@
 
   
 
-
-
+<my-account-dialog v-model="myaccountdialog"></my-account-dialog>
 
 
 
@@ -72,13 +86,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import MyAccountDialog from './components/MyAccountDialog.vue'
+
 
 export default defineComponent({
   name: 'App',
+  components:{ MyAccountDialog },
 
   data () {
     return {
       rail : true,
+      myaccountdialog : false,
+
 
       widgets: [
         {
@@ -89,10 +108,33 @@ export default defineComponent({
           widgetid: 2,
           widget:"Kalendar"
         },
+      ],
+
+
+      navigation: [
+        {
+          title: "Dashboard",
+          link : "/dashboard",
+          icon: "mdi-view-dashboard"
+        },
+
+
+        {
+          title: "Klassenverwaltung",
+          link : "/class",
+          icon : "mdi-account-group"
+        }
+      ],
 
 
 
-      ]
+
+
+      items: [
+        { text: 'Mein Account', icon: 'mdi-account-circle-outline' },
+        { text: 'Einstellungen', icon: 'mdi-cog' },
+        
+      ],
 
 
 
@@ -100,7 +142,15 @@ export default defineComponent({
   },
   methods: {
  
+    dropDown(dropItem : string) {
 
+      switch(dropItem) {
+        case "Mein Account":
+          this.myaccountdialog = true;
+          break;
+      }
+
+    }
 
 
   },

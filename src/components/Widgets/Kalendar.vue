@@ -1,8 +1,9 @@
 <template>
     <v-date-picker
-    hide-header
     color="primary"
     width="100%"
+    height="525"
+    v-model="selectedDate"
     >
  
     </v-date-picker>
@@ -18,7 +19,7 @@
    
      data () {
        return {
-         
+        selectedDate : new Date(),
          
         
        }

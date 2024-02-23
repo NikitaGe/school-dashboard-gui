@@ -2,9 +2,10 @@
    
 
    <v-data-table-virtual
+   class="fontstyle"
     :headers="headers"
-    :items="virtualBoats"
-    height="400"
+    
+    height="500"
     item-value="name"
   ></v-data-table-virtual>
       
