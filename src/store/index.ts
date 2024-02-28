@@ -18,8 +18,8 @@ export default createStore({
   actions: {
     async getSchuelerklasse(context, payload) {
      
-      const response = await axios.get(`http://localhost:3000/api/users/getUserList`)
-      console.log("DATA",response.data);
+      //const response = await axios.get(`http://localhost:3000/api/users/getUserList`);
+      //console.log("DATA",response.data);
       
       
     }
