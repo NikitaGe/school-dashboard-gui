@@ -1,19 +1,67 @@
 <template>
    
+   <v-row class="ma-2" style="height: 3rem;">
+    <v-col cols="3">
+      <v-text-field
+      label="Suche:"
+      color="primary"
+      variant="outlined"
+        density="compact"
+        v-model="search"
+      ></v-text-field>
+    </v-col>
 
-   <v-data-table-virtual
+
+    <v-col cols="3">
+      <v-autocomplete
+      variant="outlined"
+        density="compact"
+        
+      
+      ></v-autocomplete>
+    </v-col>
+
+
+   </v-row>
+
+
+   
+   <v-row class="ma-2">
+    <v-col cols="12">
+      <v-card>
+      <v-data-table-virtual
+        fixed-header
    class="fontstyle"
     :headers="headers"
-    
-    height="500"
+    :items="schueler"
+    height="550"
     item-value="name"
+    :search="search"
   ></v-data-table-virtual>
+
+</v-card>
+
+    </v-col>
+
+
+   </v-row>
+
+
+
+
+   
+   
+   
       
+
+
+
   </template>
   
   <script lang='ts'>
   import store from '@/store'
 import { defineComponent } from 'vue'
+import { mapState } from 'vuex'
   
   export default defineComponent({
     name: 'schuelertabelle-component',
@@ -21,22 +69,31 @@ import { defineComponent } from 'vue'
 
     data () {
       return {
+        search : "",
+
         headers: [
-          { title: 'Boat Type', align: 'start', key: 'name' },
-          { title: 'Speed (knots)', align: 'end', key: 'speed' },
-          { title: 'Length (m)', align: 'end', key: 'length' },
-          { title: 'Price ($)', align: 'end', key: 'price' },
-          { title: 'Year', align: 'end', key: 'year' },
+          { title: 'Vorname', align: 'start', key: 'Vorname' },
+          { title: 'Nachname', align: 'end', key: 'Nachname' },
+          { title: 'Geschlecht', align: 'end', key: 'Geschlecht' },
+          { title: 'Strasse', align: 'end', key: 'Strasse' },
+          { title: 'PLZ', align: 'end', key: 'PLZ' },
+          { title: 'Klasse', align: 'end', key: 'Klassenname' },
+          { title: 'Lehrer', align: 'end', key: 'Lehrer' },
+         
         ],
         
        
       }
     },
 
+    computed: {
+      ...mapState(["schueler"])
+    },
+
+
+
     mounted() {
       store.dispatch('getSchuelerklasse')
-
-
     }
 
 
