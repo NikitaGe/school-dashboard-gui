@@ -16,7 +16,10 @@
       <v-autocomplete
       variant="outlined"
         density="compact"
-        
+        :items="class"
+        item-title="Klassenname"
+        item-value="KlasseID"
+        v-model="selectClass"
       
       ></v-autocomplete>
     </v-col>
@@ -40,22 +43,8 @@
   ></v-data-table-virtual>
 
 </v-card>
-
     </v-col>
-
-
    </v-row>
-
-
-
-
-   
-   
-   
-      
-
-
-
   </template>
   
   <script lang='ts'>
@@ -70,11 +59,10 @@ import { mapState } from 'vuex'
     data () {
       return {
         search : "",
-
+        selectClass : "",
         headers: [
           { title: 'Vorname', align: 'start', key: 'Vorname' },
           { title: 'Nachname', align: 'end', key: 'Nachname' },
-          { title: 'Geschlecht', align: 'end', key: 'Geschlecht' },
           { title: 'Strasse', align: 'end', key: 'Strasse' },
           { title: 'PLZ', align: 'end', key: 'PLZ' },
           { title: 'Klasse', align: 'end', key: 'Klassenname' },
@@ -87,13 +75,27 @@ import { mapState } from 'vuex'
     },
 
     computed: {
-      ...mapState(["schueler"])
+      ...mapState(["schueler", "class"])
     },
 
 
 
-    mounted() {
-      store.dispatch('getSchuelerklasse')
+     async mounted() {
+      await store.dispatch('getSchuelerklasse'); 
+      await store.dispatch('getKlassen');
+    },
+
+
+
+
+    watch: {
+      selectClass() {
+        console.log(this.selectClass);
+        
+        store.dispatch('selectClass', this.selectClass);
+      }
+
+
     }
 
 
