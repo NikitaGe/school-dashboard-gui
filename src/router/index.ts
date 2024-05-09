@@ -3,48 +3,55 @@ import HomeView from '../views/HomeView.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Klassenverwaltung from '../views/Klassenverwaltung.vue'
 import Login from '../views/Login.vue'
+import store from '../store/index'
 
 const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta : {requiresAuth : false}
   },
-
+/*
   {
     path: '/',
     name: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta : {authentication : true}
   },
+  */
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta : {requiresAuth : true}
   },
 
   {
     path: '/class',
     name: 'klassenverwaltung',
-    component: Klassenverwaltung
+    component: Klassenverwaltung,
+    meta : {requiresAuth : true}
   },
 
 
-
-
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+router.beforeEach(async (to, from) => {
+  if (!store.state.isAuthenticated && to.name !== 'login') {
+    return { name: 'login' }
+  } 
+})
+
+
+
+
 
 export default router

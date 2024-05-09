@@ -1,7 +1,8 @@
 <template>
    <v-row justify="center">
-    <v-col cols="4">
-
+    <v-col xs="12" sm="6" lg="4">
+    <div style="margin-top: 15rem">
+      <h2 class="ma-3">TGBBZ-1 Login</h2>
       <form class="ma-3">
     <v-text-field
       label="Name"
@@ -27,10 +28,8 @@
     <v-btn >
       clear
     </v-btn>
-  </form>
-
-
-
+      </form>
+    </div>
     </v-col>
    </v-row>
 
