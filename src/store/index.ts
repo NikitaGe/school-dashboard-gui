@@ -27,7 +27,15 @@ export default createStore({
 
   },
   actions: {
-    async getSchuelerklasse(context, payload) {      
+
+    async login(context, payload) {
+      //const response = axios.post(`http://localhost:3000/api/users/login`, {params: {data : payload}});
+      const response = axios.post(`http://localhost:3000/api/users/login`, {data : payload});
+    },
+
+
+
+    async getSchuelerklasse(context, payload) {         
       const response = await axios.get(`http://localhost:3000/api/users/getUserList`);
       context.commit("setSchueler", response.data);
       console.log(response.data);
