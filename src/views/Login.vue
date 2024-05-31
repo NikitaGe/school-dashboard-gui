@@ -25,9 +25,12 @@
     >
       login
     </v-btn>
-    <v-btn >
-      clear
+    <v-btn @click="pushToRegister()">
+      Register
     </v-btn>
+
+  
+
       </form>
     </div>
     </v-col>
@@ -39,7 +42,7 @@
   <script lang='ts'>
   import store from '@/store';
 import { defineComponent } from 'vue'
-  
+import router from '@/router';
   
   export default defineComponent({
     name: 'login-views',
@@ -55,8 +58,16 @@ import { defineComponent } from 'vue'
     methods: {
       login() {
         store.dispatch("login", {username : this.username, password : this.password})
-      }
+      },
+
+    pushToRegister() {
+      router.push('/register')
     }
+
+
+    },
+
+   
 
 
   })

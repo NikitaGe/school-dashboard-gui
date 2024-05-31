@@ -131,6 +131,8 @@ export default defineComponent({
 
   },
   async mounted() {
+    await store.dispatch('checkAuthStatus'),
+
     await store.dispatch('getSchuelerklasse'); 
       await store.dispatch('getKlassen');
   },

@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import router from '@/router';
+axios.defaults.withCredentials = true;
 
 
 export default createStore({
@@ -49,10 +51,24 @@ export default createStore({
   },
   actions: {
 
+
+    async checkAuthStatus(context, payload) {
+      const response = await axios.post(`http://localhost:3000/api/users/checkAuthStatus`);
+      context.commit("setAuthentication", response.data)
+    },
+
+
     async login(context, payload) {
       //const response = axios.post(`http://localhost:3000/api/users/login`, {params: {data : payload}});
       const response = await axios.post(`http://localhost:3000/api/users/login`, {data : payload});
       context.commit("setAuthentication", response.data)
+    },
+    
+
+    async register(context, payload) {
+      //const response = axios.post(`http://localhost:3000/api/users/login`, {params: {data : payload}});
+      const response = await axios.post(`http://localhost:3000/api/users/register`, {data : payload});
+      router.push('/login')
     },
 
 

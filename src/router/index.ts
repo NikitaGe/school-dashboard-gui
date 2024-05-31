@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Klassenverwaltung from '../views/Klassenverwaltung.vue'
+import Register from '@/views/Register.vue';
 import Login from '../views/Login.vue'
 import store from '../store/index'
 
@@ -13,14 +14,25 @@ const routes: Array<RouteRecordRaw> = [
     component: Login,
     meta : {requiresAuth : false}
   },
-/*
+
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
+    meta : {requiresAuth : false}
+  },
+
+
+
+
+
   {
     path: '/',
-    name: 'dashboard',
-    component: Dashboard,
-    meta : {authentication : true}
+    name: 'login',
+    component: Login,
+    meta : {authentication : false}
   },
-  */
+  
   {
     path: '/dashboard',
     name: 'dashboard',
@@ -45,9 +57,15 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from) => {
-  if (!store.state.isAuthenticated && to.name !== 'login') {
+
+ 
+  
+  if (!store.state.isAuthenticated && to.meta.requiresAuth) {
     return { name: 'login' }
   } 
+  
+
+
 })
 
 
