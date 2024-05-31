@@ -39,7 +39,7 @@
    <script lang='ts'>
    import store from '@/store';
  import { defineComponent } from 'vue'
-   
+  import router from '@/router';
    
    export default defineComponent({
      name: 'register-views',
@@ -55,7 +55,16 @@
      methods: {
         register() {
          store.dispatch("register", {username : this.username, password : this.password})
+         router.push('/');
        }
+     },
+
+
+     watch: {
+
+      
+
+
      }
  
  
