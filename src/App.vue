@@ -97,7 +97,16 @@ export default defineComponent({
           title: "Klassenverwaltung",
           link : "/class",
           icon : "mdi-account-group"
+        },
+
+        {
+          title: 'Wetter', 
+          link : '/wetter',
+          icon: 'mdi-weather-cloudy'
+
         }
+
+
       ],
 
 
@@ -107,6 +116,8 @@ export default defineComponent({
       items: [
         { text: 'Mein Account', icon: 'mdi-account-circle-outline' },
         { text: 'Einstellungen', icon: 'mdi-cog' },
+        { text: 'Abmelden', icon: 'mdi-logout' },
+       
         
       ],
 
@@ -121,6 +132,10 @@ export default defineComponent({
         case "Mein Account":
           this.myaccountdialog = true;
           break;
+        case "Abmelden":
+          store.dispatch('logout');
+          router.push('/')
+
       }
     },
 

@@ -5,41 +5,33 @@ import Klassenverwaltung from '../views/Klassenverwaltung.vue'
 import Register from '@/views/Register.vue';
 import Login from '../views/Login.vue'
 import store from '../store/index'
+import Weather from '../views/Weather.vue'
 
 const routes: Array<RouteRecordRaw> = [
-
   {
     path: '/login',
     name: 'login',
     component: Login,
     meta : {requiresAuth : false}
   },
-
   {
     path: '/register',
     name: 'register',
     component: Register,
     meta : {requiresAuth : false}
   },
-
-
-
-
-
   {
     path: '/',
     name: 'login',
     component: Login,
     meta : {authentication : false}
   },
-  
   {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
     meta : {requiresAuth : true}
   },
-
   {
     path: '/class',
     name: 'klassenverwaltung',
@@ -47,6 +39,12 @@ const routes: Array<RouteRecordRaw> = [
     meta : {requiresAuth : true}
   },
 
+  {
+    path: '/wetter',
+    name: 'wetter',
+    component: Weather,
+    meta : {requiresAuth : true}
+  },
 
 ]
 
@@ -55,17 +53,11 @@ const router = createRouter({
   routes
 })
 
-
 router.beforeEach(async (to, from) => {
-
- 
-  
+  await store.dispatch('checkAuthStatus')
   if (!store.state.isAuthenticated && to.meta.requiresAuth) {
     return { name: 'login' }
-  } 
-  
-
-
+  }
 })
 
 

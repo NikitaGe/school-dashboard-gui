@@ -22,10 +22,6 @@
         </div>
 
     </v-card>  
-
-
-
-   
 </v-col>
 
 <v-col cols="12" md="6" lg="4">
@@ -35,6 +31,11 @@
      <lehrer-tabelle></lehrer-tabelle>
  </v-card>  
 </v-col>
+
+
+
+
+
 
 
 
@@ -67,6 +68,7 @@ import { mapState } from 'vuex';
 
     async mounted() {
       await store.dispatch("getNews");
+      await store.dispatch("getWetter")
      
     },
 

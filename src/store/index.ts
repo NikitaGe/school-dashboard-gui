@@ -4,13 +4,22 @@ import router from '@/router';
 axios.defaults.withCredentials = true;
 
 
+
 export default createStore({
   state: {
     schueler : [],
     lehrer : [],
     class : [],
     isAuthenticated : false,
-    news: {}
+    news: {},
+
+    wetter: {
+      maxTemperatur : [],
+      minTemperatur : [],
+      date : [],
+    },
+
+
 
   },
   getters: {
@@ -18,6 +27,13 @@ export default createStore({
 
   },
   mutations: {
+
+    setWeatherdata(state, payload) {
+      state.wetter.maxTemperatur = payload.temperature_2m_max;
+      state.wetter.minTemperatur = payload.temperature_2m_min;
+      state.wetter.date = payload.time;
+
+    },
 
     setLehrer(state, payload) {
         state.lehrer = payload;
@@ -50,6 +66,22 @@ export default createStore({
 
   },
   actions: {
+
+    
+
+    async getWetter(context, payload) {
+      const response = await axios.get(`http://localhost:3000/api/users//weather-proxy`);
+
+      context.commit("setWeatherdata", response.data.daily)
+      
+    },
+
+
+    async logout(context, payload) {
+      const response = await axios.post(`http://localhost:3000/api/users/logout`);
+
+      context.commit("setAuthentication", false)
+    },
 
 
     async checkAuthStatus(context, payload) {
@@ -105,7 +137,7 @@ export default createStore({
     },
 
     async selectClass(context, payload) {
-      
+
       const response = await axios.get(`http://localhost:3000/api/users/selectClass`, { params: { idclass : payload}});
       context.commit("setSchueler", response.data);
       console.log(response.data);
