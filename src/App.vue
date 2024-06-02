@@ -99,13 +99,14 @@ export default defineComponent({
           icon : "mdi-account-group"
         },
 
+        /*
         {
           title: 'Wetter', 
           link : '/wetter',
           icon: 'mdi-weather-cloudy'
 
         }
-
+        */
 
       ],
 
@@ -146,6 +147,7 @@ export default defineComponent({
 
   },
   async mounted() {
+    await store.dispatch("getWetter")
     await store.dispatch('checkAuthStatus'),
 
     await store.dispatch('getSchuelerklasse'); 

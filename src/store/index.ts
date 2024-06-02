@@ -71,7 +71,6 @@ export default createStore({
 
     async getWetter(context, payload) {
       const response = await axios.get(`http://localhost:3000/api/users//weather-proxy`);
-
       context.commit("setWeatherdata", response.data.daily)
       
     },
