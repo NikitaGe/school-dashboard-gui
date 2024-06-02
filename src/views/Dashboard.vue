@@ -115,18 +115,22 @@
 
       </v-col>
     </v-row-->
-
+  
+   
     <v-row class="ma-2">
       <v-col cols="12" md="6" lg="12">
-        <v-card>
+        <div class="elevation-5">
+          
             <v-row>
+              
               <v-col>
-                  <v-card>
-                    <h3 class="ma-3">Wetter</h3>
+                
+                    
              
                     <v-row>
-                      <v-divider></v-divider>
+                     
                       <v-col>
+                        
                         <div style="margin-left: 2rem;">
                         <v-icon size="x-large" style="margin-left: 3.5rem">mdi-weather-cloudy</v-icon>
                           <h3 style="margin-left: 2rem">Max {{ wetter.maxTemperatur[0] }} C</h3>
@@ -216,13 +220,13 @@
                       </div>
                       </v-col>
                     </v-row>
-                  </v-card>
+                  
               </v-col>
             </v-row>
 
 
 
-        </v-card>
+          </div>
       </v-col>
 
     </v-row>
